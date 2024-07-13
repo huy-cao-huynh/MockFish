@@ -1,6 +1,5 @@
 // Author: Huy Huynh
 // Date: 07/11/2024
-// Tutorial Followed: https://www.youtube.com/watch?v=h8fSdSUKttk&list=PLOJzCFLZdG4zk5d-1_ah2B4kqZSeIlWtt&index=1
 
 package com.chess.engine.board;
 

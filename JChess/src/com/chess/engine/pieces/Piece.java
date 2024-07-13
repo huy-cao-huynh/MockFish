@@ -1,6 +1,5 @@
 // Author: Huy Huynh
 // Date: 07/12/2024
-// Tutorial Followed: https://www.youtube.com/watch?v=GKJ3yYFCJO4&list=PLOJzCFLZdG4zk5d-1_ah2B4kqZSeIlWtt&index=3
 
 package com.chess.engine.pieces;
 
@@ -8,17 +7,27 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 
-import java.util.List;
+import java.util.Collection;
 
+// This class if of the Piece object. It represents a chess piece.
 public abstract class Piece {
 
     protected final int piecePosition;
     protected final Alliance pieceAlliance;
 
-    private Piece(final int piecePosition, final Alliance pieceAlliance) {
+    // Behavior: constructs a new chess piece
+    // Parameter:
+    //      piecePosition: the position of the piece on the board
+    //      pieceAlliance: the alliance of the piece, i.e. white or black
+    Piece(final int piecePosition, final Alliance pieceAlliance) {
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
     }
 
-    public abstract List<Move> calculateLegalMoves(final Board board);
+    public Alliance getPieceAlliance() {
+        return this.pieceAlliance;
+    }
+
+    // Behavior: calculates a list of the legal moves for the given piece
+    public abstract Collection<Move> calculateLegalMoves(final Board board);
 }
