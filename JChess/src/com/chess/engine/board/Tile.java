@@ -14,7 +14,7 @@ import java.util.Map;
 public abstract class Tile {
 
     protected final int tileCoordinate; // the coordinate of the tile
-    private static final Map<Integer, EmptyTile> EMPTY_TILES = createAllPossibleEmptyTile(); // a cache of all possible empty tiles
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTile(); // a cache of all possible empty tiles
 
     // Behavior: generates a map of all 64 possible empty tiles
     // Return: returns a map of all tiles
@@ -36,7 +36,7 @@ public abstract class Tile {
     //      tileCoordinate: coordinate of the tile
     //      piece: the piece on the tile
     public static Tile createTile(final int tileCoordinate, final Piece piece) {
-        return piece != null ? new OccupiedTile(piece, tileCoordinate) : EMPTY_TILES.get(tileCoordinate);
+        return piece != null ? new OccupiedTile(piece, tileCoordinate) : EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
     // Behavior: this is the constructor for the Tile object
@@ -56,7 +56,7 @@ public abstract class Tile {
         // Behavior: constructs a new empty tile at a given coordinate
         // Parameter:
         //      tileCoordinate: the coordinate of the given tile
-        public EmptyTile(final int tileCoordinate) {
+        private EmptyTile(final int tileCoordinate) {
             super(tileCoordinate);
         }
 
