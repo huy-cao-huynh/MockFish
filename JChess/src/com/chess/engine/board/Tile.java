@@ -21,7 +21,7 @@ public abstract class Tile {
     // Parameter: takes no parameters
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTile() {
 
-        final Map<Integer, EmptyTile> emptyTileMap = new HashMap<Integer, EmptyTile>();
+        final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
 
         for (int i = 0; i < 64; i++) {
             emptyTileMap.put(i, new EmptyTile(i));
