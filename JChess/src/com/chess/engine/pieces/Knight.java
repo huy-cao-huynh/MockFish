@@ -40,7 +40,6 @@ public class Knight extends Piece {
 
         for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
             int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset; // the current move coordinate being checked
-            final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate); // the tile the piece would occupy
 
             // checks if the tile is out of bounds
             if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
@@ -53,11 +52,14 @@ public class Knight extends Piece {
                     continue;
                 }
 
+                final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate); // the tile the piece would occupy
+
                 if (!candidateDestinationTile.isTileOccupied()) {
                     legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate)); // adds a legal move to the list if the tile is unoccupied
                 } else {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
+
                     if (this.pieceAlliance != pieceAtDestination.getPieceAlliance()) {
                         legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination)); // adds a legal attacking move to the list if the tile is occupied by a piece of opposite alliance
                     }
