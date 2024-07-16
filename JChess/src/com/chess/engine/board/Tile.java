@@ -22,7 +22,7 @@ public abstract class Tile {
 
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
 
-        for (int i = 0; i < 64; i++) {
+        for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
             emptyTileMap.put(i, new EmptyTile(i));
         }
 
@@ -41,7 +41,7 @@ public abstract class Tile {
     // Behavior: this is the constructor for the Tile object
     // Parameter:
     //      tileCoordinate: the coordinate of the given tile
-    private Tile (int tileCoordinate) {
+    private Tile (final int tileCoordinate) {
         this.tileCoordinate = tileCoordinate;
     }
 
@@ -81,7 +81,7 @@ public abstract class Tile {
         // Parameter:
         //      pieceOnTile: the piece occupying the tile
         //      tileCoordinate: the coordinate of the tile
-        private OccupiedTile(Piece pieceOnTile, final int tileCoordinate) {
+        private OccupiedTile(final Piece pieceOnTile, final int tileCoordinate) {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }
