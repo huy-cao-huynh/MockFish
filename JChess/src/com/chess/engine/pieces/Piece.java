@@ -14,6 +14,7 @@ public abstract class Piece {
 
     protected final int piecePosition;
     protected final Alliance pieceAlliance;
+    protected final boolean isFirstMove;
 
     // Behavior: constructs a new chess piece
     // Parameter:
@@ -22,10 +23,15 @@ public abstract class Piece {
     Piece(final int piecePosition, final Alliance pieceAlliance) {
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
+        this.isFirstMove = false; // todo more work here
     }
 
     public Alliance getPieceAlliance() {
         return this.pieceAlliance;
+    }
+
+    public boolean isFirstMove() {
+        return this.isFirstMove;
     }
 
     // Behavior: calculates a list of the legal moves for the given piece
