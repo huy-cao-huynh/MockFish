@@ -1,3 +1,6 @@
+// Author: Huy Huynh
+// Date: 7/27/2024
+
 package com.chess.engine.pieces;
 
 import com.chess.engine.Alliance;
