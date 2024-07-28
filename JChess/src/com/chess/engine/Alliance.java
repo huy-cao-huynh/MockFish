@@ -38,9 +38,16 @@ public enum Alliance {
         }
     };
 
+    // Behavior: returns the direction the piece is facing depending on its alliance
+    // Return: returns -1 is the piece is moving in the white direction and 1 if
+    //         the piece is moving in the black direction
     public abstract int getDirection();
 
+    // Behavior: returns whether a piece is black or not
+    // Return: true or false
     public abstract boolean isBlack();
 
+    // Behavior: returns whether a piece is white or not
+    // Return: true or false
     public abstract boolean isWhite();
 }
