@@ -29,12 +29,12 @@ public enum Alliance {
 
         @Override
         public boolean isBlack() {
-            return false;
+            return true;
         }
 
         @Override
         public boolean isWhite() {
-            return true;
+            return false;
         }
     };
 

@@ -10,8 +10,8 @@ public class BoardUtils {
     public static final boolean[] SEVENTH_COLUMN = initColumn(6);
     public static final boolean[] EIGHTH_COLUMN = initColumn(7);
 
-    public static final boolean[] SECOND_ROW = null;
-    public static final boolean[] SEVENTH_ROW = null;
+    public static final boolean[] SECOND_ROW = initRow(8);
+    public static final boolean[] SEVENTH_ROW = initRow(48);
 
     public static final int NUM_TILES = 64;
     public static final int NUM_TILES_PER_ROW = 8;
@@ -21,7 +21,7 @@ public class BoardUtils {
     }
 
     // Behavior: creates a boolean array that represents a single column being filled with true values
-    // Return: an array with only true values int the given column
+    // Return: an array with only true values in the given column
     // Parameter:
     //      columnNumber: the desired column
     private static boolean[] initColumn(int columnNumber) {
@@ -32,6 +32,20 @@ public class BoardUtils {
             columnNumber += NUM_TILES_PER_ROW;
         } while (columnNumber < NUM_TILES);
         return column;
+    }
+
+    // Behavior: creates a boolean array that represents a single row being filled with true values
+    // Return: an array with only true values in the given row
+    // Parameter:
+    //      rowNumber: the desired row
+    private static boolean[] initRow(int rowNumber) {
+        final boolean[] row = new boolean[NUM_TILES];
+
+        do {
+            row[rowNumber] = true;
+            rowNumber ++;
+        } while (rowNumber % NUM_TILES_PER_ROW != 0);
+        return row;
     }
 
     // Behavior: checks if a coordinate is within the bounds of the game board
