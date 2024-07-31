@@ -23,8 +23,8 @@ public class King extends Piece {
     // Parameter:
     //      piecePosition: the position of the piece on the board
     //      pieceAlliance: the alliance of the piece, i.e. white or black
-    King(int piecePosition, Alliance pieceAlliance) {
-        super(piecePosition, pieceAlliance);
+    public King(final Alliance pieceAlliance, final int piecePosition) {
+        super(PieceType.KING, piecePosition, pieceAlliance);
     }
 
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space
@@ -62,6 +62,11 @@ public class King extends Piece {
         }
 
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.KING.toString();
     }
 
     // Behavior: checks whether the piece is in the first column of the board and if a legal move can be made

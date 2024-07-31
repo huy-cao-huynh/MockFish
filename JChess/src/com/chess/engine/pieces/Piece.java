@@ -12,6 +12,7 @@ import java.util.Collection;
 // This class if of the Piece object. It represents a chess piece.
 public abstract class Piece {
 
+    protected final PieceType pieceType;
     protected final int piecePosition;
     protected final Alliance pieceAlliance;
     protected final boolean isFirstMove;
@@ -20,10 +21,15 @@ public abstract class Piece {
     // Parameter:
     //      piecePosition: the position of the piece on the board
     //      pieceAlliance: the alliance of the piece, i.e. white or black
-    Piece(final int piecePosition, final Alliance pieceAlliance) {
+    Piece(final PieceType pieceType, final int piecePosition, final Alliance pieceAlliance) {
+        this.pieceType = pieceType;
         this.piecePosition = piecePosition;
         this.pieceAlliance = pieceAlliance;
         this.isFirstMove = false; // todo more work here
+    }
+
+    public int getPiecePosition() {
+        return this.piecePosition;
     }
 
     public Alliance getPieceAlliance() {
@@ -34,6 +40,64 @@ public abstract class Piece {
         return this.isFirstMove;
     }
 
+    public PieceType getPieceType() {
+        return this.pieceType;
+    }
+
     // Behavior: calculates a list of the legal moves for the given piece
     public abstract Collection<Move> calculateLegalMoves(final Board board);
+
+    public enum PieceType {
+        PAWN("P") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KNIGHT("N") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        BISHOP("B") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        ROOK("R") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        QUEEN("Q") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KING("K") {
+            @Override
+            public boolean isKing() {
+                return true;
+            }
+        };
+
+        private String pieceName;
+
+        PieceType(final String pieceName) {
+            this.pieceName = pieceName;
+        }
+
+        @Override
+        public String toString() {
+            return this.pieceName;
+        }
+
+        // Behavior: checks if the piece is of the king type
+        // Return: returns true if it is a king and false if it is not
+        public abstract boolean isKing();
+    }
 }

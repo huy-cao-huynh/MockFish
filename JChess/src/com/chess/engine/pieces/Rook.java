@@ -17,8 +17,8 @@ import java.util.List;
 public class Rook extends Piece {
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-8, -1, 1, 8};
 
-    Rook(int piecePosition, Alliance pieceAlliance) {
-        super(piecePosition, pieceAlliance);
+    public Rook(final Alliance pieceAlliance, final int piecePosition) {
+        super(PieceType.ROOK, piecePosition, pieceAlliance);
     }
 
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space
@@ -60,6 +60,11 @@ public class Rook extends Piece {
         }
 
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.ROOK.toString();
     }
 
     // Behavior: checks whether the piece is in the first column of the board and if a legal move can be made

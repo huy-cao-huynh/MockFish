@@ -22,8 +22,8 @@ public class Pawn extends Piece {
     // Parameter:
     //      piecePosition: the position of the piece on the board
     //      pieceAlliance: the alliance of the piece, i.e. white or black
-    Pawn(final int piecePosition, final Alliance pieceAlliance) {
-        super(piecePosition, pieceAlliance);
+    public Pawn(final Alliance pieceAlliance, final int piecePosition) {
+        super(PieceType.PAWN, piecePosition, pieceAlliance);
     }
 
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space
@@ -74,5 +74,10 @@ public class Pawn extends Piece {
         }
 
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.PAWN.toString();
     }
 }

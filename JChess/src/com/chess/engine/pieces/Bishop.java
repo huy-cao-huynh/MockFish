@@ -18,8 +18,8 @@ import java.util.List;
 public class Bishop extends Piece {
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -7, 7, 9};
 
-    Bishop(int piecePosition, Alliance pieceAlliance) {
-        super(piecePosition, pieceAlliance);
+    public Bishop(final Alliance pieceAlliance, final int piecePosition) {
+        super(PieceType.BISHOP, piecePosition, pieceAlliance);
     }
 
 
@@ -62,6 +62,11 @@ public class Bishop extends Piece {
         }
 
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.BISHOP.toString();
     }
 
     // Behavior: checks whether the piece is in the first column of the board and if a legal move can be made

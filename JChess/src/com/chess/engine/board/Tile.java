@@ -59,6 +59,12 @@ public abstract class Tile {
             super(tileCoordinate);
         }
 
+        // Behavior: returns a String, "-", signifying this tile is empty
+        @Override
+        public String toString() {
+            return "-";
+        }
+
         // Behavior: confirms that the tile is empty
         @Override
         public boolean isTileOccupied() {
@@ -84,6 +90,13 @@ public abstract class Tile {
         private OccupiedTile(final Piece pieceOnTile, final int tileCoordinate) {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
+        }
+
+        // Behavior: returns the string representing the piece occupying the tile
+        @Override
+        public String toString() {
+            return getPiece().getPieceAlliance().isBlack() ? getPiece().toString().toLowerCase() :
+                    getPiece().toString();
         }
 
         // Behavior: confirms the tile is occupied
