@@ -24,7 +24,7 @@ public class King extends Piece {
     //      piecePosition: the position of the piece on the board
     //      pieceAlliance: the alliance of the piece, i.e. white or black
     public King(final Alliance pieceAlliance, final int piecePosition) {
-        super(piecePosition, pieceAlliance);
+        super(PieceType.KING, piecePosition, pieceAlliance);
     }
 
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space

@@ -5,6 +5,9 @@ package com.chess.engine.board;
 
 import com.chess.engine.Alliance;
 import com.chess.engine.pieces.*;
+import com.chess.engine.player.Player;
+import com.chess.engine.player.BlackPlayer;
+import com.chess.engine.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
 
 import java.util.*;
@@ -14,6 +17,9 @@ public class Board {
     private final List<Tile> gameBoard;
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
+
+    private final WhitePlayer whitePlayer;
+    private final BlackPlayer blackPlayer;
 
     // Behavior: constructs a Board object.
     // Parameter:
@@ -25,6 +31,9 @@ public class Board {
 
         final Collection<Move> whiteStandardLegalMoves = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackStandardLegalMoves = calculateLegalMoves(this.blackPieces);
+
+        this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+        this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
     }
 
     // Behavior: prints out the board
@@ -41,6 +50,26 @@ public class Board {
             }
         }
         return builder.toString();
+    }
+
+    // Behavior: returns the white player
+    public Player whitePlayer() {
+        return this.whitePlayer;
+    }
+
+    // Behavior: returns the black player
+    public Player blackPlayer() {
+        return this.blackPlayer;
+    }
+
+    // Behavior: returns the set of active black pieces
+    public Collection<Piece> getBlackPieces() {
+        return this.blackPieces;
+    }
+
+    // Behavior: returns the set of active white pieces
+    public Collection<Piece> getWhitePieces() {
+        return this.whitePieces;
     }
 
     // Behavior: builds the list of all the legal moves given a a collection of pieces
