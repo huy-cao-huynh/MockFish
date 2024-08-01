@@ -22,6 +22,13 @@ public abstract class Move {
         this.destinationCoordinate = destinationCoordinate;
     }
 
+    // Behavior: this method is a getter for the destination coordinate
+    public int getDestinationCoordinate() {
+        return this.destinationCoordinate;
+    }
+
+    public abstract Board execute();
+
     // This class is of the MajorMove object. It represents a transitional move for a chess piece.
     public static final class MajorMove extends Move {
 
@@ -32,6 +39,11 @@ public abstract class Move {
         //      destinationCoordinate: the coordinate of where the piece is being moved to
         public MajorMove(final Board board, final Piece movedPiece, final int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
+        }
+
+        @Override
+        public Board execute() {
+            return null;
         }
     }
 
@@ -48,6 +60,11 @@ public abstract class Move {
         public AttackMove(final Board board, final Piece movedPiece, final int destinationCoordinate, final Piece attackedPiece) {
             super(board, movedPiece, destinationCoordinate);
             this.attackedPiece = attackedPiece;
+        }
+
+        @Override
+        public Board execute() {
+            return null;
         }
     }
 }

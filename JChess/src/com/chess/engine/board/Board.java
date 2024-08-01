@@ -20,6 +20,7 @@ public class Board {
 
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
+    private final Player currentPlayer;
 
     // Behavior: constructs a Board object.
     // Parameter:
@@ -34,6 +35,8 @@ public class Board {
 
         this.whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+
+        this.currentPlayer = null;
     }
 
     // Behavior: prints out the board
@@ -70,6 +73,11 @@ public class Board {
     // Behavior: returns the set of active white pieces
     public Collection<Piece> getWhitePieces() {
         return this.whitePieces;
+    }
+
+    // Behavior: returns the current player
+    public Player currentPlayer() {
+        return this.currentPlayer;
     }
 
     // Behavior: builds the list of all the legal moves given a a collection of pieces
@@ -171,6 +179,7 @@ public class Board {
         builder.setMoveMaker(Alliance.WHITE); // white to move
         return builder.build();
     }
+
 
     // This class is of the Builder object. It is used to help build the game board.
     public static class Builder {
