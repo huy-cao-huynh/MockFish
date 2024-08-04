@@ -3,6 +3,10 @@
 
 package com.chess.engine;
 
+import com.chess.engine.player.BlackPlayer;
+import com.chess.engine.player.Player;
+import com.chess.engine.player.WhitePlayer;
+
 // This enum is of the Alliance object which is used to store whether a piece is white or black.
 public enum Alliance {
     WHITE {
@@ -20,6 +24,12 @@ public enum Alliance {
         public boolean isWhite() {
             return true;
         }
+
+        @Override
+        public Player choosePlayer(final WhitePlayer whitePlayer,
+                                   final BlackPlayer blackPlayer) {
+            return whitePlayer;
+        }
     },
     BLACK {
         @Override
@@ -36,6 +46,12 @@ public enum Alliance {
         public boolean isWhite() {
             return false;
         }
+
+        @Override
+        public Player choosePlayer(final WhitePlayer whitePlayer,
+                                   final BlackPlayer blackPlayer) {
+            return blackPlayer;
+        }
     };
 
     // Behavior: returns the direction the piece is facing depending on its alliance
@@ -50,4 +66,11 @@ public enum Alliance {
     // Behavior: returns whether a piece is white or not
     // Return: true or false
     public abstract boolean isWhite();
+
+    // Behavior: returns the alliance of the player
+    // Return: either the black player or white player
+    // Parameter:
+    //      whitePlayer: the white alliance player
+    //      blackPlayer: the black alliance player
+    public abstract Player choosePlayer(WhitePlayer whitePlayer, BlackPlayer blackPlayer);
 }

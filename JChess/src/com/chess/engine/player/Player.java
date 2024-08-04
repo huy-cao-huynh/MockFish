@@ -26,12 +26,14 @@ public abstract class Player {
     //      board: the state of the game board
     //      legalMoves: a collection of the players legal moves
     //      opponentMoves: a collection of the opponents legal moves
-    Player(final Board board, final Collection<Move> legalMoves, final Collection<Move> opponentMoves) {
+    Player(final Board board,
+           final Collection<Move> legalMoves,
+           final Collection<Move> opponentMoves) {
+
         this.board = board;
         this.playerKing = establishKing();
         this.legalMoves = legalMoves;
         this.isInCheck = !Player.calculateAttacksOnTile(this.playerKing.getPiecePosition(), opponentMoves).isEmpty();
-
     }
 
     // Behavior: returns the player king

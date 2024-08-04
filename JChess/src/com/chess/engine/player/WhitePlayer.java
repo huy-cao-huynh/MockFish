@@ -19,7 +19,9 @@ public class WhitePlayer extends Player {
     //      board: the state of the game board
     //      whiteStandardLegalMoves: the white pieces legal moves
     //      blackStandardLegalMoves: the black pieces legal moves
-    public WhitePlayer(Board board, Collection<Move> whiteStandardLegalMoves, Collection<Move> blackStandardLegalMoves) {
+    public WhitePlayer(final Board board,
+                       final Collection<Move> whiteStandardLegalMoves,
+                       final Collection<Move> blackStandardLegalMoves) {
         super(board, whiteStandardLegalMoves, blackStandardLegalMoves);
     }
 
