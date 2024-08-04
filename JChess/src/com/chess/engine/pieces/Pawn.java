@@ -76,6 +76,15 @@ public class Pawn extends Piece {
         return ImmutableList.copyOf(legalMoves);
     }
 
+    // Behavior: creates a new piece in the location where the piece has been moved
+    // Return: returns the new piece created
+    // Parameter:
+    //      move: the move on the piece
+    @Override
+    public Pawn movePiece(final Move move) {
+        return new Pawn(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
+    }
+
     @Override
     public String toString() {
         return PieceType.PAWN.toString();
