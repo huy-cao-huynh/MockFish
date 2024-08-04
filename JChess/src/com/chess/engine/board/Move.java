@@ -12,7 +12,7 @@ public abstract class Move {
     final Piece movedPiece;
     final int destinationCoordinate;
 
-    public static final Move NULL_MOVE = new NullMove();
+    public static final Move NULL_MOVE = new nullMove();
 
     // Behavior: this constructor constructs a new Move object.
     // Parameter:
