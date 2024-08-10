@@ -87,10 +87,20 @@ public abstract class Piece {
             public boolean isKing() {
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return false;
+            }
         },
         KNIGHT("N") {
             @Override
             public boolean isKing() {
+                return false;
+            }
+
+            @Override
+            public boolean isRook() {
                 return false;
             }
         },
@@ -99,11 +109,21 @@ public abstract class Piece {
             public boolean isKing() {
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return false;
+            }
         },
         ROOK("R") {
             @Override
             public boolean isKing() {
                 return false;
+            }
+
+            @Override
+            public boolean isRook() {
+                return true;
             }
         },
         QUEEN("Q") {
@@ -111,11 +131,21 @@ public abstract class Piece {
             public boolean isKing() {
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return false;
+            }
         },
         KING("K") {
             @Override
             public boolean isKing() {
                 return true;
+            }
+
+            @Override
+            public boolean isRook() {
+                return false;
             }
         };
 
@@ -133,5 +163,9 @@ public abstract class Piece {
         // Behavior: checks if the piece is of the king type
         // Return: returns true if it is a king and false if it is not
         public abstract boolean isKing();
+
+        // Behavior: checks if the piece is of the rook type
+        // Return: returns true if it is a rook and false if it is not
+        public abstract boolean isRook();
     }
 }
