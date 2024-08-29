@@ -49,6 +49,10 @@ public abstract class Tile {
 
     public abstract Piece getPiece();
 
+    public int getTileCoordinate() {
+        return this.tileCoordinate;
+    }
+
     // This class if of the EmptyTile object. It represents an empty tile on a chess board.
     public static final class EmptyTile extends Tile {
 
