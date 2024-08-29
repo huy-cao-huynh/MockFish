@@ -1,9 +1,10 @@
 // Author: Huy Huynh
 // Date: 7/20/2024
 
-package com.chess.engine;
+package com.chess;
 
 import com.chess.engine.board.Board;
+import com.chess.gui.Table;
 
 public class JChess {
 
@@ -11,5 +12,7 @@ public class JChess {
         Board board = Board.createStandardBoard();
 
         System.out.println(board);
+
+        Table table = new Table();
     }
 }
