@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Queen extends Piece{
-    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, 8, -7, -1, 1, 7, 8, 9};
+    private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -8, -7, -1, 1, 7, 8, 9};
 
     public Queen(final Alliance pieceAlliance, final int piecePosition) {
         super(PieceType.QUEEN, piecePosition, pieceAlliance);
@@ -33,14 +33,14 @@ public class Queen extends Piece{
             int candidateDestinationCoordinate = this.piecePosition;
 
             while (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) { // continues looping as long as the piece can keep moving in that direction
+
+                if (isFirstColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset) ||
+                        isEighthColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset)) {
+                    break;
+                }
+
                 candidateDestinationCoordinate += candidateCoordinateOffset;
-
                 if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
-
-                    if (isFirstColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset) ||
-                            isEighthColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset)) {
-                        break;
-                    }
 
                     final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate); // the tile the piece would occupy
 
@@ -50,7 +50,7 @@ public class Queen extends Piece{
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
 
-                        if (this.pieceAlliance != pieceAtDestination.getPieceAlliance()) {
+                        if (this.pieceAlliance != pieceAlliance) {
                             legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination)); // adds a legal attacking move to the list if the tile is occupied by a piece of opposite alliance
                         }
                         break;

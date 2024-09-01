@@ -35,14 +35,14 @@ public class Bishop extends Piece {
             int candidateDestinationCoordinate = this.piecePosition;
 
             while (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) { // continues looping as long as the piece can keep moving in that direction
-                candidateDestinationCoordinate += candidateCoordinateOffset;
 
-                if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
-
-                    if (isFirstColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset) ||
+                if (isFirstColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset) ||
                         isEighthColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset)) {
-                        break;
-                    }
+                    break;
+                }
+
+                candidateDestinationCoordinate += candidateCoordinateOffset;
+                if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
 
                     final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate); // the tile the piece would occupy
 
@@ -52,7 +52,7 @@ public class Bishop extends Piece {
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
 
-                        if (this.pieceAlliance != pieceAtDestination.getPieceAlliance()) {
+                        if (this.pieceAlliance != pieceAlliance) {
                             legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination)); // adds a legal attacking move to the list if the tile is occupied by a piece of opposite alliance
                         }
                         break;
