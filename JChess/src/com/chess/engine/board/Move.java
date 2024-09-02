@@ -10,9 +10,10 @@ import com.chess.engine.pieces.Rook;
 
 // This class is of the move object. It contains the behaviors of a chess move.
 public abstract class Move {
-    final Board board;
-    final Piece movedPiece;
-    final int destinationCoordinate;
+    protected final Board board;
+    protected final Piece movedPiece;
+    protected final int destinationCoordinate;
+    protected final boolean isFirstMove;
 
     public static final Move NULL_MOVE = new nullMove();
 
@@ -22,11 +23,20 @@ public abstract class Move {
     //      movedPiece: the piece being moved
     //      destinationCoordinate: the coordinate of where the piece is being moved to
     private Move(final Board board,
-                 final Piece movedPiece,
+                 final Piece pieceMoved,
                  final int destinationCoordinate) {
         this.board = board;
-        this.movedPiece = movedPiece;
+        this.movedPiece = pieceMoved;
         this.destinationCoordinate = destinationCoordinate;
+        this.isFirstMove = pieceMoved.isFirstMove();
+    }
+
+    private Move(final Board board,
+                 final int destinationCoordinate) {
+        this.board = board;
+        this.destinationCoordinate = destinationCoordinate;
+        this.movedPiece = null;
+        this.isFirstMove = false;
     }
 
     // Behavior: hashcode for the move class
@@ -37,6 +47,7 @@ public abstract class Move {
 
         result = prime * result + this.destinationCoordinate;
         result = prime * result + this.movedPiece.hashCode();
+        result = prime * result + this.movedPiece.getPiecePosition();
         return result;
     }
 
@@ -51,13 +62,14 @@ public abstract class Move {
             return false;
         }
         final Move otherMove = (Move) other;
-        return getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
+        return getCurrentCoordinate() == otherMove.getCurrentCoordinate() &&
+                getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
                 getMovedPiece().equals(otherMove.getMovedPiece());
     }
 
     // Behavior: returns the coordinate of the current moved piece
     public int getCurrentCoordinate(){
-        return this.getMovedPiece().getPiecePosition();
+        return this.movedPiece.getPiecePosition();
     }
 
     // Behavior: this method is a getter for the destination coordinate
@@ -93,7 +105,6 @@ public abstract class Move {
 
         // places all the current players pieces that are not the moved piece
         for (final Piece piece : this.board.currentPlayer().getActivePieces()) {
-            // TODO hashcode and equals for pieces
             if (!this.movedPiece.equals(piece)) {
                 builder.setPiece(piece);
             }
@@ -123,6 +134,16 @@ public abstract class Move {
                          final Piece movedPiece,
                          final int destinationCoordinate) {
             super(board, movedPiece, destinationCoordinate);
+        }
+
+        @Override
+        public boolean equals(final Object other) {
+            return this == other || (other instanceof MajorMove && super.equals(other));
+        }
+
+        @Override
+        public String toString() {
+            return movedPiece.getPieceType().toString() + BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
         }
     }
 
@@ -260,6 +281,11 @@ public abstract class Move {
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
             return builder.build();
         }
+
+        @Override
+        public String toString() {
+            return BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
+        }
     }
 
     // This class is of the CastleMove object. It represents the castling move for a rook and king.
@@ -368,7 +394,7 @@ public abstract class Move {
 
         // Behavior: this constructor constructs a new NullMove object
         public nullMove() {
-            super(null, null,-1);
+            super(null,-1);
         }
 
         @Override

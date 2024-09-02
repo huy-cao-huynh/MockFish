@@ -24,8 +24,15 @@ public class Knight extends Piece {
     // Parameter:
     //      piecePosition: the position of the piece on the board
     //      pieceAlliance: the alliance of the piece, i.e. white or black
-    public Knight(final Alliance pieceAlliance, final int piecePosition) {
-        super(PieceType.KNIGHT, piecePosition, pieceAlliance);
+    public Knight(final Alliance pieceAlliance,
+                  final int piecePosition) {
+        super(PieceType.KNIGHT, piecePosition, pieceAlliance, true);
+    }
+
+    public Knight(final Alliance pieceAlliance,
+                final int piecePosition,
+                final boolean isFirstMove) {
+        super(PieceType.KNIGHT, piecePosition, pieceAlliance, isFirstMove);
     }
 
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space
