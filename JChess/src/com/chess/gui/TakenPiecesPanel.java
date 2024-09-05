@@ -63,14 +63,14 @@ public class TakenPiecesPanel extends JPanel {
 
         Collections.sort(whiteTakenPieces, new Comparator<Piece>() {
             @Override
-            public int compare(Piece o1, Piece o2) {
+            public int compare(final Piece o1, final Piece o2) {
                 return Ints.compare(o1.getPieceValue(), o2.getPieceValue());
             }
         });
 
         Collections.sort(blackTakenPieces, new Comparator<Piece>() {
             @Override
-            public int compare(Piece o1, Piece o2) {
+            public int compare(final Piece o1, final Piece o2) {
                 return Ints.compare(o1.getPieceValue(), o2.getPieceValue());
             }
         });
@@ -80,8 +80,9 @@ public class TakenPiecesPanel extends JPanel {
                 final BufferedImage image = ImageIO.read(new File("JChess/art/pieces/plain/" +
                         takenPiece.getPieceAlliance().toString().substring(0, 1) + "" + takenPiece + ".gif"));
                 final ImageIcon icon = new ImageIcon(image);
-                final JLabel imageLabel = new JLabel();
-                this.southPanel.add(imageLabel);
+                final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(icon.getIconWidth() - 15,
+                        icon.getIconHeight() - 15, Image.SCALE_SMOOTH)));
+                this.northPanel.add(imageLabel);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -92,7 +93,8 @@ public class TakenPiecesPanel extends JPanel {
                 final BufferedImage image = ImageIO.read(new File("JChess/art/pieces/plain/" +
                         takenPiece.getPieceAlliance().toString().substring(0, 1) + "" + takenPiece + ".gif"));
                 final ImageIcon icon = new ImageIcon(image);
-                final JLabel imageLabel = new JLabel();
+                final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(icon.getIconWidth() - 15,
+                        icon.getIconHeight() - 15, Image.SCALE_SMOOTH)));
                 this.southPanel.add(imageLabel);
             } catch (IOException e) {
                 throw new RuntimeException(e);

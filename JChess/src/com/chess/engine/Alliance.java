@@ -3,6 +3,7 @@
 
 package com.chess.engine;
 
+import com.chess.engine.board.BoardUtils;
 import com.chess.engine.player.BlackPlayer;
 import com.chess.engine.player.Player;
 import com.chess.engine.player.WhitePlayer;
@@ -16,6 +17,11 @@ public enum Alliance {
         }
 
         @Override
+        public int getOppositeDirection() {
+            return 1;
+        }
+
+        @Override
         public boolean isBlack() {
             return false;
         }
@@ -23,6 +29,11 @@ public enum Alliance {
         @Override
         public boolean isWhite() {
             return true;
+        }
+
+        @Override
+        public boolean isPawnPromotionSquare(int position) {
+            return BoardUtils.EIGHTH_RANK[position];
         }
 
         @Override
@@ -38,6 +49,11 @@ public enum Alliance {
         }
 
         @Override
+        public int getOppositeDirection() {
+            return -1;
+        }
+
+        @Override
         public boolean isBlack() {
             return true;
         }
@@ -45,6 +61,11 @@ public enum Alliance {
         @Override
         public boolean isWhite() {
             return false;
+        }
+
+        @Override
+        public boolean isPawnPromotionSquare(int position) {
+            return BoardUtils.FIRST_RANK[position];
         }
 
         @Override
@@ -59,6 +80,11 @@ public enum Alliance {
     //         the piece is moving in the black direction
     public abstract int getDirection();
 
+    // Behavior: returns the opposite direction the piece is facing depending on its alliance
+    // Return: returns 1 is the piece is moving in the white direction and -1 if
+    //         the piece is moving in the black direction
+    public abstract int getOppositeDirection();
+
     // Behavior: returns whether a piece is black or not
     // Return: true or false
     public abstract boolean isBlack();
@@ -66,6 +92,8 @@ public enum Alliance {
     // Behavior: returns whether a piece is white or not
     // Return: true or false
     public abstract boolean isWhite();
+
+    public abstract boolean isPawnPromotionSquare(int position);
 
     // Behavior: returns the alliance of the player
     // Return: either the black player or white player
