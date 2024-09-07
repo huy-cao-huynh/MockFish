@@ -27,4 +27,8 @@ public class MoveTransition {
     public Board getTransitionBoard() {
         return this.transitionBoard;
     }
+
+    public Move getTransitionMove() {
+        return this.move;
+    }
 }

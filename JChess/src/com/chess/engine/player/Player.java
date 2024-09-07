@@ -37,6 +37,7 @@ public abstract class Player {
         this.legalMoves = ImmutableList.copyOf(Iterables.concat(legalMoves, calculateKingCastles(legalMoves, opponentMoves)));
     }
 
+
     // Behavior: returns the player king
     public King getPlayerKing() {
         return this.playerKing;
@@ -87,28 +88,36 @@ public abstract class Player {
 
     // Behavior: returns if the player's king has been checkmated
     public boolean isInCheckMate() {
-        return this.isInCheck && !hasEscapeMoves(); // the king is in check and there are no escape moves
+        return this.isInCheck && hasEscapeMoves(); // the king is in check and there are no escape moves
     }
 
-    // Behavior: returns true is there are escape moves and false if there are no escape moves
+    // Behavior: returns false is there are escape moves and true if there are no escape moves
     protected boolean hasEscapeMoves() {
         for (final Move move : this.legalMoves) {
             final MoveTransition transition = makeMove(move);
             if (transition.getMoveStatus().isDone()) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     // Behavior: returns if the player's king is in a stalemate
     public boolean isInStaleMate() {
-        return !this.isInCheck && !hasEscapeMoves(); // the king is not in check but there are no moves
+        return !this.isInCheck && hasEscapeMoves(); // the king is not in check but there are no moves
     }
 
 
     public boolean isCastled() {
-        return false;
+        return this.playerKing.isCastled();
+    }
+
+    public boolean isKingSideCastleCapable() {
+        return this.playerKing.isKingSideCastleCapable();
+    }
+
+    public boolean isQueenSideCastleCapable() {
+        return this.playerKing.isQueenSideCastleCapable();
     }
 
     // Behavior: checks is a move is legal then transitions the board into the game state where the move has either

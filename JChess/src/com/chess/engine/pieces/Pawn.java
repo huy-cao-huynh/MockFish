@@ -33,6 +33,11 @@ public class Pawn extends Piece {
         super(PieceType.PAWN, piecePosition, pieceAlliance, isFirstMove);
     }
 
+    @Override
+    public int locationBonus() {
+        return this.pieceAlliance.pawnBonus(this.piecePosition);
+    }
+
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space
     //           is occupied, the space is only valid if the alliance is opposite of the current piece
     // Return: returns a list of legal moves

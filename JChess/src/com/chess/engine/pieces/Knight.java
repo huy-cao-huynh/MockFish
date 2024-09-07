@@ -35,6 +35,11 @@ public class Knight extends Piece {
         super(PieceType.KNIGHT, piecePosition, pieceAlliance, isFirstMove);
     }
 
+    @Override
+    public int locationBonus() {
+        return this.pieceAlliance.knightBonus(this.piecePosition);
+    }
+
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space
     //           is occupied, the space is only valid if the alliance is opposite of the current piece
     // Return: returns a list of legal moves
@@ -65,7 +70,6 @@ public class Knight extends Piece {
                     legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate)); // adds a legal move to the list if the tile is unoccupied
                 } else {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
-                    final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
 
                     if (this.pieceAlliance != pieceAtDestination.getPieceAlliance()) {
                         legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination)); // adds a legal attacking move to the list if the tile is occupied by a piece of opposite alliance

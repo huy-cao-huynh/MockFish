@@ -48,10 +48,9 @@ public abstract class Piece {
             return true;
         }
 
-        if (!(other instanceof Piece)) {
+        if (!(other instanceof Piece otherPiece)) {
             return false;
         }
-        final Piece otherPiece = (Piece) other;
         return piecePosition == otherPiece.getPiecePosition() && pieceType == otherPiece.getPieceType() &&
                 pieceAlliance == otherPiece.getPieceAlliance() && isFirstMove == otherPiece.isFirstMove();
     }
@@ -80,6 +79,8 @@ public abstract class Piece {
     public int getPieceValue() {
         return this.pieceType.getPieceValue();
     }
+
+    public abstract int locationBonus();
 
     // Behavior: calculates a list of the legal moves for the given piece
     public abstract Collection<Move> calculateLegalMoves(final Board board);
@@ -154,8 +155,8 @@ public abstract class Piece {
             }
         };
 
-        private String pieceName;
-        private int pieceValue;
+        private final String pieceName;
+        private final int pieceValue;
 
         PieceType(final String pieceName, final int pieceValue) {
             this.pieceName = pieceName;

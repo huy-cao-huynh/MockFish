@@ -29,6 +29,11 @@ public class Rook extends Piece {
         super(PieceType.ROOK, piecePosition, pieceAlliance, isFirstMove);
     }
 
+    @Override
+    public int locationBonus() {
+        return this.pieceAlliance.rookBonus(this.piecePosition);
+    }
+
     // Behavior: this method calculates a list of legal moves for the piece. Valid spaces must be on the board. If a space
     //           is occupied, the space is only valid if the alliance is opposite of the current piece
     // Return: returns a list of legal moves

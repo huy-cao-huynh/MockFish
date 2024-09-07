@@ -15,8 +15,6 @@ public abstract class Move {
     protected final int destinationCoordinate;
     protected final boolean isFirstMove;
 
-    public static final Move NULL_MOVE = new nullMove();
-
     // Behavior: this constructor constructs a new Move object.
     // Parameter:
     //      board: the game board
@@ -218,7 +216,7 @@ public abstract class Move {
 
         @Override
         public String toString() {
-            return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).charAt(0) + "x" + // TODO come back to check
+            return BoardUtils.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).charAt(0) + "x" +
                     BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
         }
     }
@@ -412,7 +410,7 @@ public abstract class Move {
             }
 
             builder.setPiece(this.movedPiece.movePiece(this));
-            builder.setPiece(new Rook(this.castleRook.getPieceAlliance(), this.castleRookDestination, false)); // TODO look into the first move on normal pieces
+            builder.setPiece(new Rook(this.castleRook.getPieceAlliance(), this.castleRookDestination, false));
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
             return builder.build();
         }
@@ -544,10 +542,10 @@ public abstract class Move {
     }
 
     // This class is of the nullMove object. It represents an invalid move.
-    public static final class nullMove extends Move {
+    public static final class NullMove extends Move {
 
         // Behavior: this constructor constructs a new NullMove object
-        public nullMove() {
+        public NullMove() {
             super(null,65);
         }
 
@@ -578,6 +576,10 @@ public abstract class Move {
             throw new RuntimeException("Not instantiable");
         }
 
+        public static Move getNullMove() {
+            return MoveUtils.NULL_MOVE;
+        }
+
         public static Move createMove(final Board board,
                                       final int currentCoordinate,
                                       final int destinationCoordinate) {
@@ -586,7 +588,7 @@ public abstract class Move {
                     return move;
                 }
             }
-            return NULL_MOVE;
+            return MoveUtils.NULL_MOVE;
         }
     }
 }

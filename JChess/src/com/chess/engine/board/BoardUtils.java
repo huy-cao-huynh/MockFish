@@ -17,10 +17,6 @@ public class BoardUtils {
 
     public static final boolean[] EIGHTH_RANK = initRow(0);
     public static final boolean[] SEVENTH_RANK = initRow(8);
-    public static final boolean[] SIXTH_RANK = initRow(16);
-    public static final boolean[] FIFTH_RANK = initRow(24);
-    public static final boolean[] FOURTH_RANK = initRow(32);
-    public static final boolean[] THIRD_RANK = initRow(40);
     public static final boolean[] SECOND_RANK = initRow(48);
     public static final boolean[] FIRST_RANK = initRow(56);
 
@@ -100,5 +96,15 @@ public class BoardUtils {
 
     public static String getPositionAtCoordinate(final int coordinate) {
         return ALGEBRAIC_NOTATION[coordinate];
+    }
+
+    public static boolean isThreatenedBoardImmediate (final Board board) {
+        return board.whitePlayer().isInCheck() ||
+                board.blackPlayer().isInCheck();
+    }
+
+    public static boolean isEndGame(final Board board) {
+        return board.currentPlayer().isInCheckMate() ||
+                board.currentPlayer().isInStaleMate();
     }
 }
