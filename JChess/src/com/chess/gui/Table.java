@@ -8,6 +8,7 @@ import com.chess.engine.pieces.Piece;
 import com.chess.engine.player.MoveTransition;
 import com.chess.engine.player.ai.MiniMax;
 import com.chess.engine.player.ai.MoveStrategy;
+import com.chess.engine.player.ai.StockAlphaBeta;
 import com.google.common.collect.Lists;
 
 import javax.imageio.ImageIO;
@@ -238,11 +239,9 @@ public class Table extends Observable {
         @Override
         protected Move doInBackground() throws Exception {
 
-            final MoveStrategy miniMax = new MiniMax(4);
+            final MoveStrategy strategy = new StockAlphaBeta(Table.get().getGameSetup().getSearchDepth());
 
-            final Move bestMove = miniMax.execute(Table.get().getGameBoard());
-
-            return bestMove;
+            return strategy.execute(Table.get().getGameBoard());
         }
 
         @Override
