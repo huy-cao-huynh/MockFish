@@ -9,9 +9,8 @@ import static com.chess.engine.pieces.Piece.PieceType.BISHOP;
 
 public final class StandardBoardEvaluator implements BoardEvaluator {
 
-    private static final int CHECK_BONUS = 45;
     private static final int CHECK_MATE_BONUS = 10000;
-    private static final int DEPTH_BONUS = 100;
+    private static final int CHECK_BONUS = 45;
     private static final int CASTLE_BONUS = 25;
     private static final int MOBILITY_MULTIPLIER = 5;
     private static final int ATTACK_MULTIPLIER = 1;
@@ -56,12 +55,13 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
                 attacks(player) +
                 castle(player) +
                 pieceEvaluations(player) +
-                pawnStructure(player);
+                pawnStructure(player) +
+                kingSafety(player);
     }
 
     private static int kingThreats(final Player player,
                                    final int depth) {
-        return player.getOpponent().isInCheckMate() ? checkmate(player, depth) : check(player);
+        return player.getOpponent().isInCheckMate() ? CHECK_MATE_BONUS * depthBonus(depth) : check(player);
     }
 
     private static int attacks(final Player player) {
@@ -79,12 +79,8 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
     }
 
 
-    private static int checkmate(final Player player, int depth) {
-        return player.getOpponent().isInCheckMate() ? CHECK_MATE_BONUS * depthBonus(depth) : 0;
-    }
-
     private static int depthBonus(int depth) {
-        return depth == 0 ? 1 : DEPTH_BONUS * depth;
+        return depth == 0 ? 1 : 100 * depth;
     }
 
     private static int check(final Player player) {
@@ -117,5 +113,10 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
             }
         }
         return pieceValuationScore + (numBishops == 2 ? TWO_BISHOPS_BONUS : 0);
+    }
+
+    private static int kingSafety(final Player player) {
+        final KingSafetyAnalyzer.KingDistance kingDistance = KingSafetyAnalyzer.get().calculateKingTropism(player);
+        return ((kingDistance.getEnemyPiece().getPieceValue() / 100) * kingDistance.getDistance());
     }
 }

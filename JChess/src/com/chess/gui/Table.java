@@ -6,7 +6,6 @@ import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.player.MoveTransition;
-import com.chess.engine.player.ai.MiniMax;
 import com.chess.engine.player.ai.MoveStrategy;
 import com.chess.engine.player.ai.StockAlphaBeta;
 import com.google.common.collect.Lists;

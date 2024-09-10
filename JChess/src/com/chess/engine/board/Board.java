@@ -246,11 +246,6 @@ public class Board {
             this.enPassantPawn = enPassantPawn;
         }
 
-        public Builder setMoveTransition(final Move transitionMove) {
-            this.transitionMove = transitionMove;
-            return this;
-        }
-
         public Board build() {
             return new Board(this);
         }
