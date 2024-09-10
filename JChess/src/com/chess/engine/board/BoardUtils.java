@@ -3,6 +3,8 @@
 
 package com.chess.engine.board;
 
+import com.chess.engine.pieces.King;
+import com.chess.engine.pieces.Piece;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.HashMap;
@@ -52,6 +54,15 @@ public class BoardUtils {
         }
 
         return ImmutableMap.copyOf(positionToCoordinate);
+    }
+
+    public static boolean isKingPawnTrap(final Board board,
+                                         final King king,
+                                         final int frontTile) {
+        final Piece piece = board.getPiece(frontTile);
+        return piece != null &&
+                piece.getPieceType() == Piece.PieceType.PAWN &&
+                piece.getPieceAlliance() != king.getPieceAlliance();
     }
 
     // Behavior: creates a boolean array that represents a single column being filled with true values

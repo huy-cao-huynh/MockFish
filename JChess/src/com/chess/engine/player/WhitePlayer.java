@@ -5,6 +5,7 @@ package com.chess.engine.player;
 
 import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
+import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
@@ -69,7 +70,10 @@ public class WhitePlayer extends Player {
                     if (Player.calculateAttacksOnTile(61, opponentLegals).isEmpty() &&
                             Player.calculateAttacksOnTile(62, opponentLegals).isEmpty() &&
                             rookTile.getPiece().getPieceType().isRook()) {
-                        kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing, 62, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 61));
+                        if (!BoardUtils.isKingPawnTrap(this.board, this.playerKing, 52)) {
+                            kingCastles.add(new Move.KingSideCastleMove(this.board, this.playerKing, 62, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 61));
+
+                        }
                     }
                 }
             }
@@ -84,11 +88,12 @@ public class WhitePlayer extends Player {
                         Player.calculateAttacksOnTile(58, opponentLegals).isEmpty() &&
                         Player.calculateAttacksOnTile(59, opponentLegals).isEmpty() &&
                         rookTile.getPiece().getPieceType().isRook()) {
-                    kingCastles.add(new Move.QueenSideCastleMove(this.board, this.playerKing, 58, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 59));
+                    if (!BoardUtils.isKingPawnTrap(this.board, this.playerKing, 52)) {
+                        kingCastles.add(new Move.QueenSideCastleMove(this.board, this.playerKing, 58, (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(), 59));
+                    }
                 }
             }
         }
-
         return ImmutableList.copyOf(kingCastles);
     }
 
