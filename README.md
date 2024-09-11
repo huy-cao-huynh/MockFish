@@ -35,12 +35,7 @@ Future Plans:
 There are a few improvements I'm planning/additions I would like to make some time in the future:
 * Make an integrated database with openings/book moves to speed up the beginning phase of the game.
 * Add endgame tablebases for perfect play in simplified positions
-* Edit the heuristic evaluation with more in-depth and nuanced factors the greatly improve the ELO of the engine.
-
-Acknowledgments:
--
-This project was inspired by the YouTube channel "Software Architecture and Design". I followed his playlist https://www.youtube.com/playlist?list=PLOJzCFLZdG4zk5d-1_ah2B4kqZSeIlWtthttps://www.youtube.com/playlist?list=PLOJzCFLZdG4zk5d-1_ah2B4kqZSeIlWtt to create this project!
-
+* Edit the heuristic evaluation with more in-depth and nuanced factors that greatly improve the ELO of the engine.
 
 
 
